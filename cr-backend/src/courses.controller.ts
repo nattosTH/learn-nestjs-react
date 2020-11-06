@@ -1,9 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
+import { throws } from 'assert';
+import { CoursesService } from './courses.service';
+import { Course } from './interfaces/courses.interface';
 
 @Controller('courses')
 export class CoursesController {
+  constructor(private coursesService: CoursesService) {}
+
   @Get()
-  findAll(): any {
-    return { message: 'Good Moring' };
+  async findAll(): Promise<Course[]> {
+    return this.coursesService.findAll();
   }
 }
